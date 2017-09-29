@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>@ViewData["Title"] - Game Store</title>
+
+  <environment exclude="Development">
+    <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/dist/app.css" asp-append-version="true" />
+  </environment>
+</head>
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" asp-page="/Index">Game Store</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" asp-page="/Index">Home</a></li>
+        <li class="nav-item"><a class="nav-link" asp-page="/Contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    @RenderBody()
+    <hr>
+    <footer>
+      <p>&copy; 2017 - Game Store</p>
+    </footer>
+  </div>
+
+  <script src="~/dist/vendor.js" asp-append-version="true"></script>
+  <script src="~/dist/app.js" asp-append-version="true"></script>
+  @RenderSection("Scripts", required: false)
+</body>
+</html>
