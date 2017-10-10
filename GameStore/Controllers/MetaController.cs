@@ -20,7 +20,7 @@ namespace GameStore.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var gamesApiUrl = "/api/games";
+            var gamesApiUrl = "/games";
 
             var meta = new StorageInfo
             {

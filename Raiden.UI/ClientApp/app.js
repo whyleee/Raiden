@@ -11,13 +11,15 @@ import store from './store'
 import App from './components/app.vue'
 import Home from './components/home.vue'
 import Counter from './components/counter.vue'
+import Storage from './components/storage.vue'
 
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
 
 const routes = [
   { path: '/', component: Home },
-  { path: '/counter', component: Counter }
+  { path: '/counter', component: Counter },
+  { path: '/storage', component: Storage }
 ]
 
 const router = new VueRouter({

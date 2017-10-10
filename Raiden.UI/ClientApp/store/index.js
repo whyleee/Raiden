@@ -1,23 +1,27 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import counter from './counter'
+import data from './data'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   modules: {
-    counter
+    counter,
+    data
   }
 })
 
 if (module.hot) {
   module.hot.accept([
-    './counter'
+    './counter',
+    './data'
   ], () => {
     store.hotUpdate({
       modules: {
         /* eslint-disable global-require */
-        counter: require('./counter').default
+        counter: require('./counter').default,
+        data: require('./data').default
         /* eslint-enable */
       }
     })

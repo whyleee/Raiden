@@ -15,7 +15,8 @@ export default {
   data() {
     return {
       items: [
-        { title: 'Counter', to: '/counter' }
+        { title: 'Counter', to: '/counter' },
+        { title: 'Storage', to: '/storage' }
       ]
     }
   }
