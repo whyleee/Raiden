@@ -3,8 +3,8 @@ import api from '../lib/api'
 export default {
   namespaced: true,
   state: {
-    meta: null,
-    items: null
+    meta: {},
+    items: []
   },
   mutations: {
     setMeta(state, value) {
