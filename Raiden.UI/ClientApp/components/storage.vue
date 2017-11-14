@@ -2,6 +2,11 @@
   <b-row>
     <b-col>
       <h1>{{meta.name}}</h1>
+      <b-button-toolbar class="storage-toolbar">
+        <b-button-group>
+          <b-btn to="/storage/create">Create</b-btn>
+        </b-button-group>
+      </b-button-toolbar>
       <b-table striped hover :fields="fields" :items="items"></b-table>
     </b-col>
   </b-row>
@@ -22,9 +27,6 @@ export default {
       'items'
     ]),
     fields() {
-      if (!this.meta.itemType) {
-        return []
-      }
       return this.meta.itemType.fields.map((field) => {
         const label = field.attributes ? field.attributes.displayName : undefined
         return {
@@ -68,3 +70,8 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus">
+.storage-toolbar
+  margin: 1rem 0
+</style>

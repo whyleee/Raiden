@@ -12,6 +12,7 @@ import App from './components/app.vue'
 import Home from './components/home.vue'
 import Counter from './components/counter.vue'
 import Storage from './components/storage.vue'
+import Item from './components/item.vue'
 
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
@@ -19,7 +20,8 @@ Vue.use(BootstrapVue)
 const routes = [
   { path: '/', component: Home },
   { path: '/counter', component: Counter },
-  { path: '/storage', component: Storage }
+  { path: '/storage', component: Storage },
+  { path: '/storage/create', component: Item }
 ]
 
 const router = new VueRouter({

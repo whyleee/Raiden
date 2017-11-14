@@ -3,7 +3,12 @@ import api from '../lib/api'
 export default {
   namespaced: true,
   state: {
-    meta: {},
+    meta: {
+      itemType: {
+        fields: []
+      },
+      collections: []
+    },
     items: []
   },
   mutations: {
