@@ -11,6 +11,12 @@ export default {
     },
     items: []
   },
+  getters: {
+    getFieldLabel: () => (field) => {
+      return field.attributes.displayName ||
+        field.name[0].toUpperCase() + field.name.slice(1)
+    }
+  },
   mutations: {
     setMeta(state, value) {
       state.meta = value

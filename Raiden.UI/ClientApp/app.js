@@ -5,6 +5,7 @@ import 'babel-polyfill'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import BootstrapVue from 'bootstrap-vue'
+import VeeValidate from 'vee-validate'
 
 import store from './store'
 
@@ -16,6 +17,7 @@ import Item from './components/item.vue'
 
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
+Vue.use(VeeValidate, { inject: false })
 
 const routes = [
   { path: '/', component: Home },

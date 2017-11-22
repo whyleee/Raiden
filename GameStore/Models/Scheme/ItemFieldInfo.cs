@@ -13,7 +13,5 @@ namespace GameStore.Models.Scheme
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string Kind { get; set; }
         public IDictionary<string, object> Attributes { get; set; }
-
-        public bool ShouldSerializeAttributes() => Attributes.Any();
     }
 }

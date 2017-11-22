@@ -7,7 +7,7 @@
           <b-btn to="/storage/create">Create</b-btn>
         </b-button-group>
       </b-button-toolbar>
-      <b-table striped hover :fields="fields" :items="items"></b-table>
+      <b-table striped hover :fields="itemFields" :items="items"></b-table>
     </b-col>
   </b-row>
 </template>
@@ -26,12 +26,11 @@ export default {
       'meta',
       'items'
     ]),
-    fields() {
+    itemFields() {
       return this.meta.itemType.fields.map((field) => {
-        const label = field.attributes ? field.attributes.displayName : undefined
         return {
           key: field.name,
-          label,
+          label: field.attributes.displayName,
           formatter: (value) => {
             if (!value) {
               return ''
