@@ -51,9 +51,12 @@ export default {
             } else if (field.type == 'bool') {
               return value ? '✔' : '✘'
             } else if (field.type == 'datetime') {
-              return formatDate(value, 'L')
+              return formatDate(value, 'MMMM D, YYYY')
             } else if (field.type == 'array') {
-              return value.join(', ')
+              const options = field.attributes.selectOptions
+              return value
+                .map(val => options.find(opt => opt.value == val).text)
+                .join(', ')
             }
             return value
           }

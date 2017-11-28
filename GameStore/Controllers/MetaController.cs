@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using GameStore.Models;
 using GameStore.Models.Scheme;
+using GameStore.Models.Scheme.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameStore.Controllers
@@ -111,6 +112,12 @@ namespace GameStore.Controllers
                 {
                     var display = (DisplayAttribute) attr;
                     dict.Add("displayName", display.Name);
+                }
+                if (attr is SelectOptionsAttribute)
+                {
+                    var selectOptions = (SelectOptionsAttribute) attr;
+                    var optionProvider = (ISelectOptionProvider) Activator.CreateInstance(selectOptions.OptionProvider);
+                    dict.Add("selectOptions", optionProvider.GetOptions());
                 }
             }
 

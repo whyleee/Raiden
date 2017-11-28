@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using GameStore.Models.Scheme.DataAnnotations;
 using Microsoft.Rest.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
@@ -46,6 +47,7 @@ namespace GameStore.Models
         public DateTime ReleaseDate { get; set; }
 
         [Required]
+        [SelectOptions(typeof(PlatformOptions))]
         public IEnumerable<Platform> Platforms { get; set; }
 
         [Display(Name = "Age rating")]
@@ -61,6 +63,24 @@ namespace GameStore.Models
         public bool Multiplayer { get; set; }
 
         [Required]
+        [SelectOptions(typeof(GameLanguageSelectOptions))]
         public IEnumerable<string> Languages { get; set; }
+    }
+
+    public class GameLanguageSelectOptions : ISelectOptionProvider
+    {
+        public IEnumerable<SelectOption> GetOptions()
+        {
+            return new[]
+            {
+                new SelectOption("Chinese", "zh"),
+                new SelectOption("English", "en"),
+                new SelectOption("French", "fr"),
+                new SelectOption("German", "de"),
+                new SelectOption("Italian", "it"),
+                new SelectOption("Japanese", "ja"),
+                new SelectOption("Spanish", "es")
+            };
+        }
     }
 }
