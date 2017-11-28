@@ -7,10 +7,8 @@
       :data-vv-as="getFieldLabel(field)"
       :state="state"
       :input-class="inputClass"
-      format="MMMM d, yyyy"></datepicker>
-    <b-form-feedback>
-      {{errors.first(field.name)}}
-    </b-form-feedback>
+      format="MMMM d, yyyy">
+    </datepicker>
   </div>
 </template>
 

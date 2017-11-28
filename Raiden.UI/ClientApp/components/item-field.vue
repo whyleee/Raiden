@@ -1,5 +1,9 @@
 <template>
-  <b-form-group :horizontal="true" :label="getFieldLabel(field)">
+  <b-form-group
+    :horizontal="true"
+    :label="getFieldLabel(field)"
+    :feedback="errors.first(field.name)"
+    :state="state">
     <item-field-checkbox v-if="field.type == 'bool'" :item="item" :field="field"></item-field-checkbox>
     <item-field-date v-else-if="field.type == 'datetime'" :item="item" :field="field"></item-field-date>
     <item-field-select-many v-else-if="field.type == 'array'" :item="item" :field="field"></item-field-select-many>
@@ -21,6 +25,7 @@ export default {
     ItemFieldSelectMany,
     ItemFieldText
   },
+  inject: ['$validator'],
   props: [
     'item',
     'field'
@@ -28,7 +33,13 @@ export default {
   computed: {
     ...mapGetters('data', [
       'getFieldLabel'
-    ])
+    ]),
+    state() {
+      if (this.errors.has(this.field.name)) {
+        return 'invalid'
+      }
+      return null
+    }
   }
 }
 </script>

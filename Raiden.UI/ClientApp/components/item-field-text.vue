@@ -10,9 +10,6 @@
       :data-vv-as="getFieldLabel(field)"
       :state="state">
     </b-form-input>
-    <b-form-feedback>
-      {{errors.first(field.name)}}
-    </b-form-feedback>
   </div>
 </template>
 
