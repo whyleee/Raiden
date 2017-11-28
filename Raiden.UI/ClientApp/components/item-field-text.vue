@@ -1,17 +1,17 @@
 <template>
-<div>
-  <b-form-input type="text"
-    :name="field.name"
-    v-model="item[field.name]"
-    :readonly="readonly"
-    v-validate="validators"
-    :data-vv-as="getFieldLabel(field)"
-    :state="state">
-  </b-form-input>
-  <b-form-feedback>
-    {{errors.first(field.name)}}
-  </b-form-feedback>
-</div>
+  <div>
+    <b-form-input type="text"
+      :name="field.name"
+      v-model="item[field.name]"
+      :readonly="readonly"
+      v-validate="validators"
+      :data-vv-as="getFieldLabel(field)"
+      :state="state">
+    </b-form-input>
+    <b-form-feedback>
+      {{errors.first(field.name)}}
+    </b-form-feedback>
+  </div>
 </template>
 
 <script>
@@ -32,7 +32,8 @@ export default {
     },
     validators() {
       return {
-        required: !!this.field.attributes.required
+        required: !!this.field.attributes.required,
+        url: this.field.kind == 'Url' || this.field.kind == 'ImageUrl' ? [ true ] : false
       }
     },
     state() {
