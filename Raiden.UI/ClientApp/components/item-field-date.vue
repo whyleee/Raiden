@@ -33,7 +33,7 @@ export default {
   },
   watch: {
     date(newValue) {
-      this.item[this.field.name] = format(newValue, 'DD-MM-YYYY')
+      this.item[this.field.name] = format(newValue, 'YYYY-MM-DD')
     }
   },
   computed: {

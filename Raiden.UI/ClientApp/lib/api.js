@@ -12,6 +12,9 @@ export default {
     baseUrl: `${config.apiUrl}`,
     get(url) {
       return axios.get(this.baseUrl + url)
+    },
+    post(url, item) {
+      return axios.post(this.baseUrl + url, item)
     }
   }
 }

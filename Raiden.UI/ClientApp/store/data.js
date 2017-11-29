@@ -23,6 +23,9 @@ export default {
     },
     setItems(state, value) {
       state.items = value
+    },
+    addItem(state, value) {
+      state.items.push(value)
     }
   },
   actions: {
@@ -33,6 +36,10 @@ export default {
     async fetchItems({ state, commit }) {
       const res = await api.data.get(state.meta.url)
       commit('setItems', res.data)
+    },
+    async addItem({ state, commit }, item) {
+      commit('addItem', item)
+      await api.data.post(state.meta.url, item)
     }
   }
 }

@@ -33,8 +33,11 @@ export default {
   async created() {
     await this.fetchMeta()
     this.meta.itemType.fields.forEach((field) => {
-      this.form[field.name] = this.item ? this.item[field.name] : null
+      if (this.item) {
+        this.form[field.name] = this.item[field.name]
+      }
     })
+    this.form.locale = 'en' // TODO: temp quick set of readonly required param
   },
   computed: {
     ...mapState('data', [
@@ -46,12 +49,16 @@ export default {
   },
   methods: {
     ...mapActions('data', [
-      'fetchMeta'
+      'fetchMeta',
+      'addItem'
     ]),
-    submit() {
-      this.$validator.validateAll().then((ok) => {
-        // this.$emit('submit', this.form)
-      })
+    async submit() {
+      const ok = await this.$validator.validateAll()
+      if (!ok) {
+        return
+      }
+      await this.addItem(this.form)
+      this.$router.go(-1)
     }
   }
 }
