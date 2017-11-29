@@ -34,8 +34,15 @@ export default {
     updateItem(state, value) {
       const index = state.items.findIndex(i => i.id == value.id)
       state.items[index] = value
-      if (state.item.id == value.id) {
+      if (state.item && state.item.id == value.id) {
         state.item = value
+      }
+    },
+    deleteItem(state, id) {
+      const index = state.items.findIndex(i => i.id == id)
+      state.items.splice(index, 1)
+      if (state.item && state.item.id == id) {
+        state.item = null
       }
     }
   },
@@ -53,9 +60,9 @@ export default {
       if (!item) {
         const res = await api.data.getById(state.meta.url, id)
         item = res.data
+        commit('addItem', item)
       }
       commit('setItem', item)
-      commit('addItem', item)
     },
     async addItem({ state, commit }, item) {
       commit('addItem', item)
@@ -64,6 +71,10 @@ export default {
     async updateItem({ state, commit }, item) {
       commit('updateItem', item)
       await api.data.put(state.meta.url, item.id, item)
+    },
+    async deleteItem({ state, commit }, id) {
+      commit('deleteItem', id)
+      await api.data.delete(state.meta.url, id)
     }
   }
 }

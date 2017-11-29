@@ -10,8 +10,15 @@
       <b-table striped hover :fields="itemFields" :items="items">
         <template slot="actions" scope="row">
           <b-link :to="{ name: 'item', params: { id: row.item.id }}">Edit</b-link>
+          <b-link @click.stop="confirmDeleteItem(row.item.id)">Delete</b-link>
         </template>
       </b-table>
+
+      <b-modal id="deleteItemModal"
+        title="Delete item"
+        @ok="deleteSelectedItem">
+        <p>Are you sure you want to delete item "{{selectedItemId}}"?</p>
+      </b-modal>
     </b-col>
   </b-row>
 </template>
@@ -21,6 +28,11 @@ import { mapState, mapActions } from 'vuex'
 import { format as formatDate } from 'date-fns/esm'
 
 export default {
+  data() {
+    return {
+      selectedItemId: null
+    }
+  },
   async created() {
     await this.fetchMeta()
     await this.fetchItems()
@@ -74,8 +86,17 @@ export default {
   methods: {
     ...mapActions('data', [
       'fetchMeta',
-      'fetchItems'
-    ])
+      'fetchItems',
+      'deleteItem'
+    ]),
+    confirmDeleteItem(itemId) {
+      this.selectedItemId = itemId
+      this.$root.$emit('bv::show::modal', 'deleteItemModal')
+    },
+    async deleteSelectedItem() {
+      await this.deleteItem(this.selectedItemId)
+      this.selectedItemId = null
+    }
   }
 }
 </script>

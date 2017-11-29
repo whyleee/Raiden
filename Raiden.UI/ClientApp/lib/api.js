@@ -21,6 +21,9 @@ export default {
     },
     put(url, id, item) {
       return axios.put(`${this.baseUrl}${url}/${id}`, item)
+    },
+    delete(url, id) {
+      return axios.delete(`${this.baseUrl}${url}/${id}`)
     }
   }
 }

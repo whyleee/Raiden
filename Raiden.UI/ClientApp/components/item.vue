@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import ItemField from './item-field.vue'
 
 export default {
@@ -31,6 +31,8 @@ export default {
     await this.fetchMeta()
     if (this.itemId) {
       await this.fetchItem(this.itemId)
+    } else {
+      this.setItem(null)
     }
 
     if (this.item) {
@@ -56,6 +58,9 @@ export default {
     }
   },
   methods: {
+    ...mapMutations('data', [
+      'setItem'
+    ]),
     ...mapActions('data', [
       'fetchMeta',
       'fetchItem',
