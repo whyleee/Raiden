@@ -7,7 +7,11 @@
           <b-btn to="/storage/create">Create</b-btn>
         </b-button-group>
       </b-button-toolbar>
-      <b-table striped hover :fields="itemFields" :items="items"></b-table>
+      <b-table striped hover :fields="itemFields" :items="items">
+        <template slot="actions" scope="row">
+          <b-link :to="{ name: 'item', params: { id: row.item.id }}">Edit</b-link>
+        </template>
+      </b-table>
     </b-col>
   </b-row>
 </template>
@@ -61,7 +65,10 @@ export default {
             return value
           }
         }
-      })
+      }).concat([{
+        key: 'actions',
+        label: 'Actions'
+      }])
     }
   },
   methods: {

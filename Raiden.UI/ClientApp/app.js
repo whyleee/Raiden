@@ -22,8 +22,9 @@ Vue.use(VeeValidate, { inject: false })
 const routes = [
   { path: '/', component: Home },
   { path: '/counter', component: Counter },
-  { path: '/storage', component: Storage },
-  { path: '/storage/create', component: Item }
+  { path: '/storage', name: 'storage', component: Storage },
+  { path: '/storage/create', component: Item },
+  { path: '/storage/:id', name: 'item', component: Item }
 ]
 
 const router = new VueRouter({

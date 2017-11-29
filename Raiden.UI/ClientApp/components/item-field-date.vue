@@ -26,20 +26,18 @@ export default {
     'item',
     'field'
   ],
-  data() {
-    return {
-      date: null
-    }
-  },
-  watch: {
-    date(newValue) {
-      this.item[this.field.name] = format(newValue, 'YYYY-MM-DD')
-    }
-  },
   computed: {
     ...mapGetters('data', [
       'getFieldLabel'
     ]),
+    date: {
+      get() {
+        return this.item[this.field.name]
+      },
+      set(value) {
+        this.item[this.field.name] = format(value, 'YYYY-MM-DD')
+      }
+    },
     validators() {
       return {
         required: !!this.field.attributes.required

@@ -7,7 +7,7 @@
           :item="form"
           :field="field">
         </item-field>
-        <b-button type="submit" variant="dark">Create</b-button>
+        <b-button type="submit" variant="dark">{{submitButtonText}}</b-button>
       </b-form>
     </b-col>
   </b-row>
@@ -22,9 +22,6 @@ export default {
     ItemField
   },
   $validates: true,
-  props: [
-    'item'
-  ],
   data() {
     return {
       form: {}
@@ -32,33 +29,50 @@ export default {
   },
   async created() {
     await this.fetchMeta()
-    this.meta.itemType.fields.forEach((field) => {
-      if (this.item) {
-        this.form[field.name] = this.item[field.name]
-      }
-    })
+    if (this.itemId) {
+      await this.fetchItem(this.itemId)
+    }
+
+    if (this.item) {
+      this.meta.itemType.fields.forEach((field) => {
+        this.$set(this.form, field.name, this.item[field.name])
+      })
+    }
     this.form.locale = 'en' // TODO: temp quick set of readonly required param
   },
   computed: {
     ...mapState('data', [
-      'meta'
+      'meta',
+      'item'
     ]),
+    itemId() {
+      return this.$route.params.id
+    },
     itemFields() {
       return this.meta.itemType.fields
+    },
+    submitButtonText() {
+      return this.itemId ? 'Save' : 'Create'
     }
   },
   methods: {
     ...mapActions('data', [
       'fetchMeta',
-      'addItem'
+      'fetchItem',
+      'addItem',
+      'updateItem'
     ]),
     async submit() {
       const ok = await this.$validator.validateAll()
       if (!ok) {
         return
       }
-      await this.addItem(this.form)
-      this.$router.go(-1)
+      if (this.itemId) {
+        await this.updateItem(this.form)
+      } else {
+        await this.addItem(this.form)
+      }
+      this.$router.push({ name: 'storage' })
     }
   }
 }
